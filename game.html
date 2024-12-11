@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Safety for Kids</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        header {
+            background-color: #ffcc00;
+            padding: 20px;
+        }
+
+        header h1 {
+            color: #333;
+        }
+
+        .content {
+            margin: 20px;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .content h2 {
+            color: #ff6600;
+        }
+
+        .content p {
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        .game-container {
+            margin-top: 30px;
+        }
+
+        .game {
+            margin: 20px auto;
+            padding: 20px;
+            max-width: 600px;
+            background-color: #e6f7ff;
+            border-radius: 10px;
+            border: 2px solid #007acc;
+        }
+
+        .question {
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+
+        .choices button {
+            display: block;
+            width: 80%;
+            margin: 10px auto;
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            background-color: #ffcc99;
+            cursor: pointer;
+        }
+
+        .choices button:hover {
+            background-color: #ff9966;
+        }
+
+        footer {
+            margin-top: 40px;
+            padding: 10px;
+            background-color: #333;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>E-Safety for Kids</h1>
+    </header>
+
+    <div class="content">
+        <h2>Welcome!</h2>
+        <p>The internet is a wonderful place to learn, play, and explore. But we must use it safely! This website is here to teach you some simple rules to stay safe online.</p>
+    </div>
+
+    <div class="game-container">
+        <div class="game">
+            <div class="question" id="question">What should you do if a stranger messages you online?</div>
+            <div class="choices" id="choices">
+                <button onclick="checkAnswer(0)">Ignore and tell a trusted adult</button>
+                <button onclick="checkAnswer(1)">Reply to learn more about them</button>
+                <button onclick="checkAnswer(1)">Share your personal information</button>
+                <button onclick="checkAnswer(0)">Block and report them</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 E-Safety for Kids. Stay safe online!</p>
+    </footer>
+
+    <script>
+        const questions = [
+            {
+                text: "What should you do if a stranger messages you online?",
+                choices: [
+                    "Ignore and tell a trusted adult",
+                    "Reply to learn more about them",
+                    "Share your personal information",
+                    "Block and report them"
+                ],
+                correct: [0, 3]
+            },
+            {
+                text: "Is it safe to share your password with friends?",
+                choices: [
+                    "Yes, because they are my friends",
+                    "No, passwords are private"
+                ],
+                correct: [1]
+            },
+            {
+                text: "What should you do if you see something online that makes you uncomfortable?",
+                choices: [
+                    "Tell a trusted adult",
+                    "Keep it to yourself",
+                    "Ignore it and continue browsing"
+                ],
+                correct: [0]
+            },
+            {
+                text: "Which of these is a strong password?",
+                choices: [
+                    "12345",
+                    "mypassword",
+                    "P@ssw0rd2024!",
+                    "abcdef"
+                ],
+                correct: [2]
+            },
+            {
+                text: "If you see a strange website with a strange link, what should you do?",
+                choices:[
+                    "Click on the link",
+                    "Ignore it and keep going on",
+                    "Tell a trusted adult",
+                    "Share it with friends and tell them to click on the link"
+                ],
+                correct:[2,3]
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+
+        function loadQuestion() {
+            const questionElement = document.getElementById('question');
+            const choicesContainer = document.getElementById('choices');
+
+            const currentQuestion = questions[currentQuestionIndex];
+
+            questionElement.innerText = currentQuestion.text;
+            choicesContainer.innerHTML = '';
+
+            currentQuestion.choices.forEach((choice, index) => {
+                const button = document.createElement('button');
+                button.innerText = choice;
+                button.onclick = () => checkAnswer(index);
+                choicesContainer.appendChild(button);
+            });
+        }
+
+        function checkAnswer(selectedIndex) {
+            const currentQuestion = questions[currentQuestionIndex];
+
+            if (currentQuestion.correct.includes(selectedIndex)) {
+                alert('Correct! Great job staying safe online!');
+            } else {
+                alert('Oops! You need some more knowledge to stay safe online!')
+            }
+
+            currentQuestionIndex++;
+
+            if (currentQuestionIndex < questions.length) {
+                loadQuestion();
+            } else {
+                alert('You completed the quiz! Great job!');
+                currentQuestionIndex = 0;
+                loadQuestion();
+            }
+        }
+
+        window.onload = loadQuestion;
+    </script>
+</body>
+</html>
